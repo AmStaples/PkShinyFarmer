@@ -10,7 +10,9 @@ from ctypes import wintypes
 import random
 import sys
 import ctypes
-
+import keyboard
+from TestText import send_scancode
+"""
 user32 = ctypes.WinDLL('user32', use_last_error=True)
 INPUT_KEYBOARD = 1
 KEYEVENTF_EXTENDEDKEY = 0x0001
@@ -73,19 +75,25 @@ def leftclick():
     ReleaseKey(0x01)
     # you can change 0x30 to any key you want. For more info look at :
     # msdn.microsoft.com/en-us/library/dd375731
-
-
+"""
+A = 0x01E
+D = 0x020
+time.sleep(2)
 def Mbox(title, text, style):
     return ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
 i = 1
 while i < 6:
+    if keyboard.is_pressed('q'): #Escape figured out.
+        break
     try:
         x, b = pyautogui.locateCenterOnScreen('C:\Assignments\\shinx.png', confidence=0.8)
     except:
-        a()
-        d()
-
+        send_scancode(A, 0.5)
+        send_scancode(D, 0.5)
+        # parameters are (ScanCode, timeInSeconds)
+        
+#
     else:
         sys.exit
         i = 7
